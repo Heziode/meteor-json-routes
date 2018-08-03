@@ -123,13 +123,14 @@ JsonRoutes.sendResult = function (res, options) {
 
   // Set status code on response
   res.statusCode = options.code || 200;
-
-  // Set response body
-  writeJsonToBody(res, options.data);
-
+  res.setHeader('Content-type', 'application/json');
+  
   // We've already set global headers on response, but if they
   // pass in more here, we set those.
   if (options.headers) setHeaders(res, options.headers);
+
+  // Set response body
+  writeToBody(res, options.data);
 
   // Send the response
   res.end();
@@ -141,11 +142,10 @@ function setHeaders(res, headers) {
   });
 }
 
-function writeJsonToBody(res, json) {
+function writeToBody(res, json) {
   if (json !== undefined) {
     var shouldPrettyPrint = (process.env.NODE_ENV === 'development');
     var spacer = shouldPrettyPrint ? 2 : null;
-    res.setHeader('Content-type', 'application/json');
     res.write(JSON.stringify(json, null, spacer));
   }
 }
