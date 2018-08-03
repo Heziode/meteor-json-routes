@@ -2,7 +2,7 @@
 
 ### Note
 
-Fork of `simple:json-routes` (<https://atmospherejs.com/simple/json-routes>) that doesn't conflicts with `ostrio:files`.
+Fork of [`simple:json-routes`](https://atmospherejs.com/simple/json-routes) that doesn't conflicts with `ostrio:files` and fix set Headers issues.
 
 ----
 

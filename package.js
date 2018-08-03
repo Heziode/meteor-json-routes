@@ -1,12 +1,12 @@
 Package.describe({
-  name: 'jss:json-routes',
-  version: '2.3.0',
+  name: 'heziode:json-routes',
+  version: '2.3.1',
 
   // Brief, one-line summary of the package.
   summary: 'The simplest way to define server-side routes that return JSON',
 
   // URL to the Git repository containing the source code for this package.
-  git: 'https://github.com/JSSolutions/meteor-json-routes',
+  git: 'https://github.com/Heziode/meteor-json-routes',
 
   // By default, Meteor will default to using README.md for documentation.
   // To avoid submitting documentation, set this field to null.
