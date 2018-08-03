@@ -1,16 +1,16 @@
 /* global JsonRoutes:true */
 
-var Fiber = Npm.require('fibers');
-var connect = Npm.require('connect');
-var connectRoute = Npm.require('connect-route');
+let Fiber = Npm.require('fibers');
+let connect = Npm.require('connect');
+let connectRoute = Npm.require('connect-route');
 
 JsonRoutes = {};
 
-var urlEncodedMiddleware = connect.urlencoded();
-var jsonMiddleware = connect.json();
-var queryMiddleware = connect.query();
+let urlEncodedMiddleware = connect.urlencoded();
+let jsonMiddleware = connect.json();
+let queryMiddleware = connect.query();
 
-var composeWithMiddlewares = function (callback) {
+let composeWithMiddlewares = function (callback) {
   return function (req, res, next) {
     // only execute custom middlewares at API routes
     // required to avoid conflict with `ostrio:files`
@@ -36,7 +36,7 @@ WebApp.connectHandlers.use(JsonRoutes.Middleware);
 JsonRoutes.routes = [];
 
 // Save reference to router for later
-var connectRouter;
+let connectRouter;
 
 // Register as a middleware
 WebApp.connectHandlers.use(Meteor.bindEnvironment(connectRoute(function (router) {
@@ -45,7 +45,7 @@ WebApp.connectHandlers.use(Meteor.bindEnvironment(connectRoute(function (router)
 
 // Error middleware must be added last, to catch errors from prior middleware.
 // That's why we cache them and then add after startup.
-var errorMiddlewares = [];
+let errorMiddlewares = [];
 JsonRoutes.ErrorMiddleware = {
   use: function () {
     errorMiddlewares.push(arguments);
@@ -97,7 +97,7 @@ JsonRoutes.add = function (method, path, handler) {
   }));
 };
 
-var responseHeaders = {
+let responseHeaders = {
   'Cache-Control': 'no-store',
   Pragma: 'no-cache',
 };
@@ -129,6 +129,8 @@ JsonRoutes.sendResult = function (res, options) {
   // pass in more here, we set those.
   if (options.headers) setHeaders(res, options.headers);
 
+  console.log("res: ", res.getHeader('Content-type'));
+
   // Set response body
   writeToBody(res, options.data);
 
@@ -142,10 +144,10 @@ function setHeaders(res, headers) {
   });
 }
 
-function writeToBody(res, json) {
-  if (json !== undefined) {
-    var shouldPrettyPrint = (process.env.NODE_ENV === 'development');
-    var spacer = shouldPrettyPrint ? 2 : null;
-    res.write(JSON.stringify(json, null, spacer));
+function writeToBody(res, data) {
+  if (data !== undefined) {
+    let shouldPrettyPrint = (process.env.NODE_ENV === 'development');
+    let spacer = shouldPrettyPrint ? 2 : null;
+    res.write((res.getHeader('Content-type') === "application/json") ? JSON.stringify(data, null, spacer) : data);
   }
 }

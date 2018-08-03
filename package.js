@@ -1,6 +1,6 @@
 Package.describe({
   name: 'heziode:json-routes',
-  version: '2.3.2',
+  version: '2.3.3',
 
   // Brief, one-line summary of the package.
   summary: 'The simplest way to define server-side routes that return JSON',
@@ -40,7 +40,7 @@ Package.onUse(function (api) {
 Package.onTest(function (api) {
   api.use('tinytest');
   api.use('test-helpers');
-  api.use('simple:json-routes');
+  api.use('heziode:json-routes');
   api.use('http');
-  api.addFiles('json-routes-tests.js');
+  api.mainModule('json-routes-tests.js');
 });
