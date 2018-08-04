@@ -129,8 +129,6 @@ JsonRoutes.sendResult = function (res, options) {
   // pass in more here, we set those.
   if (options.headers) setHeaders(res, options.headers);
 
-  console.log("res: ", res.getHeader('Content-type'));
-
   // Set response body
   writeToBody(res, options.data);
 

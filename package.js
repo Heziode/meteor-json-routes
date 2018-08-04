@@ -1,6 +1,6 @@
 Package.describe({
   name: 'heziode:json-routes',
-  version: '2.3.3',
+  version: '2.3.4',
 
   // Brief, one-line summary of the package.
   summary: 'The simplest way to define server-side routes that return JSON',
